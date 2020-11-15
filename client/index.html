@@ -17,28 +17,29 @@
 <body >
 
   <section id="navbar">
-    <nav class="navbar navbar-info bg-info">
-      <span class="navbar-brand mb-0 h1">Todo</span>
+    <nav class="navbar navbar-info bg-info shadow">
+      <span class="navbar-brand mb-0 display-2 text-light">Todo</span>
       <div id="logout">
         <button id="logoutButton" class="btn btn-danger">Log Out</button>
       </div>
     </nav>
   </section>
 
-  <section id="error">
-
+  <section style="position: relative; z-index: 1000;" class="">
+    <div id="error" style="position: absolute;" class="w-100"></div>
+    <div id="success" style="position: absolute;" class="w-100"></div>
   </section>
-
+  
   <section id="register">
     <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
       <div class="bg-warning shadow rounded p-4">
-        <p class="h3" style="text-align: center;">Register</p>
+        <p class="h3 text-light" style="text-align: center;">Register</p>
         <form id="registerForm">
           <div class=" form-group">
-            <input type="text" class="form-control" placeholder="Your e-mail here">
+            <input type="email" name="email" class="form-control" placeholder="Your e-mail here" required>
           </div>
           <div class=" form-group">
-            <input type="password" class="form-control" placeholder="Your password here">
+            <input type="password" name="password" class="form-control" placeholder="Your password here" required>
           </div>
           <div class=" form-group" style="text-align: center;">
             <input type="submit" value="Register" class="btn btn-primary" class="form-control">
@@ -50,10 +51,8 @@
             <div class="g-signin2 " data-onsuccess="onSignIn"></div>
           </div>
           <div class="form-group text-center">
-            <p>
-              Already have account?
-            </p>
-            <a href="" id="redirectRegister">Login Now!</a>
+            <p>Already have account?</p>
+            <a href="" id="redirectLogin">Login Now!</a>
           </div>
         </form>
       </div>
@@ -63,13 +62,13 @@
   <section id="login">
     <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
       <div class="bg-warning shadow rounded p-4">
-        <p class="h3" style="text-align: center;">Login</p>
-        <form class="">
+        <p class="h3 text-light mb-4" style="text-align: center;">Login</p>
+        <form id="loginForm" class="">
           <div class=" form-group">
-            <input type="text" id="email" class="form-control" placeholder="Your e-mail here">
+            <input type="email" name="login_email" class="form-control" placeholder="Your e-mail here" required>
           </div>
           <div class=" form-group">
-            <input type="password" id="password" class="form-control" placeholder="Your password here">
+            <input type="password" name="login_password" class="form-control" placeholder="Your password here" required>
           </div>
           <div class=" form-group" style="text-align: center;">
             <input type="submit" id="submitLogin" value="Login" class="btn btn-primary" class="form-control">
@@ -81,9 +80,7 @@
             <div class="g-signin2 " data-onsuccess="onSignIn"></div>
           </div>
           <div class="form-group text-center">
-            <p>
-              Don't have account?
-            </p>
+            <p class="mb-0">Don't have account?</p>
             <a href="" id="redirectRegister">Register Now!</a>
           </div>
         </form>
@@ -92,34 +89,42 @@
   </section>
 
   <section id="addTodo">
-    <div class="p-2 mx-0 mt-3 bg-info">
-      <form id="addTodoForm" class="row">
-        <div class="form-group col-2">
+    <div class="p-2 mx-0 mt-2 bg-info shadow rounded">
+      <form id="addTodoForm" class="row mx-0">
+        <div class="form-group col-2 mb-0">
           <input type="text" name="title" class='form-control' placeholder="Title"> 
         </div>
-        <div class="form-group col-5">
+        <div class="form-group col-5 mb-0">
           <textarea class="form-control" name="description" rows="1" placeholder="Description"></textarea>
         </div>
-        <div class="form-group col-3" >
+        <div class="form-group col-3 mb-0" >
           <input type="date" name="due_date" class="form-control">
         </div>
-        <div class="form-group col-2">
+        <div class="form-group col-2 mb-0">
           <input type="submit" value="Add Todo" class="form-control btn btn-success">
         </div>
       </form>
+
     </div>
   </section>
+  <section id="editTodo">
+  </section>
 
-  <section id="todo" class=" bg-info mx-0">
-    <div class="row">
-
-      <div class="p-2" id="todoNotYet"></div>
-      <div class="p-2" id="todoDone"></div>
+  <section id="todo" class="shadow rounded mt-2 mx-0">
+    <div class="bg-info mt-2 shadow rounded">
+      <div class="bg-info h4 rounded text-center text-light">Uncompleted Todo</div>
+      <div class="bg-warning" id="todoNotYet" style="display: flex; flex-wrap: nowrap; overflow-x: auto; margin-right: 0vw; margin-left: 0vw;">
+      </div>
+    </div>
+    
+    <div class="bg-info mt-2 shadow rounded">
+      <div class="bg-info h4 rounded text-center text-light">Completed Todo</div>
+      <div class="bg-success" id="todoDone" style="display: flex; flex-wrap: nowrap; overflow-x: auto; margin-right: 0vw; margin-left: 0vw;">
+      </div>
     </div>
   </section>
   
-  <section id="editTodo">
-  </section>
+
   
 
 

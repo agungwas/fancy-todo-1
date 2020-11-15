@@ -7,11 +7,11 @@ module.exports = class UserController {
   static async register(req, res, next) {
     try {
       let { email, password } = req.body
+      console.log('sampai register', email, password)
       let created = await User.create({email, password}, { returning: true })
-      res.status(201).json({ id: created.id, email: created.email })
+      res.status(201).json({ message: `User with e-mail ${created.email} registered successfully`})
     } catch (err) {
-      res.status(400).json(err)
-      // next({ msg: err.errors[0].message, status: 400 })
+      next({ msg: err, status: 400 })
     }
   }
   static async login(req, res, next) {
@@ -45,17 +45,21 @@ module.exports = class UserController {
       });
       const payload = ticket.getPayload();
       const user = await User.findOne({ where: { email: payload.email }})
-      if(user) {
-        res.status(200).json(payload.email)
-        
+      if(!user) {
+        const newUser = await User.create({ email: payload.email, password: "terserah" })
+        console.log(newUser)
+        const token = JWT.create({
+          id: newUser.id, email: newUser.email
+        })
+        res.status(200).json({ token })
       } else {
-        
-        res.status(200).json('not found')
+        const token = JWT.create({ 
+          id: user.id, email: user.email
+        })
+        res.status(200).json({ token })
       }
-
-
     } catch (error) {
-      res.status(500).json(error.responseJSON)
+      next(error)
     }
   }
 }
